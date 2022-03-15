@@ -10,8 +10,8 @@ import os
 load_dotenv()
 
 service_url = os.getenv('service_url')
-token = os.getenv('token')
-topic = os.getenv('topic')
+token = os.getenv('token1')
+topic = os.getenv('topic1')
 
 client = pulsar.Client(service_url,authentication=pulsar.AuthenticationToken(token))
 
