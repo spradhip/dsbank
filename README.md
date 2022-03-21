@@ -11,6 +11,9 @@ The intent of this app is to showcase an app that leverages Streaming, Operation
 ## Setup Required
 ```shell
 pip install python-dotenv
+pip install pulsar-client==2.9.1
+pip install faker
+pip3 install 'pulsar-client[avro]'
 ```
 
 ## Execution
