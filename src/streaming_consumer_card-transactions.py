@@ -5,8 +5,8 @@ import os
 load_dotenv()
 
 service_url = os.getenv('service_url')
-token = os.getenv('token2')
-topic = os.getenv('topic2')
+token = os.getenv('token')
+topic = os.getenv('topic_card')
 
 client = pulsar.Client(service_url, authentication=pulsar.AuthenticationToken(token))
 consumer = client.subscribe(topic, 'card-transactions')

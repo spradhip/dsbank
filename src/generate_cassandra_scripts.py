@@ -9,7 +9,7 @@ def customer_scripts():
     print("customer scripts")
 
     fake = Faker()
-    sql1 = "INSERT INTO dsbank.customer_profile(customer_id,first_name,last_name,dob,gender,email,phone_number,address1,city,state,zip,country,status_code) " \
+    sql1 = "INSERT INTO dsbank2.customer_profile(customer_id,first_name,last_name,dob,gender,email,phone_number,address1,city,state,zip,country,status_code) " \
           "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
     for i in range (1,10):
@@ -39,7 +39,7 @@ def bank_account_scripts():
 
     fake = Faker()
 
-    sql = "INSERT INTO dsbank.bank_accounts_by_account_no(account_no,routing_no,date_created,balance,account_type,status,customer_id) " \
+    sql = "INSERT INTO dsbank2.bank_accounts_by_account_no(account_no,routing_no,date_created,balance,account_type,status,customer_id) " \
           "VALUES "
 
     account_no = str(random.randint(1, 10000))
@@ -60,7 +60,7 @@ def card_account_scripts():
 
     for i in range(1, 4):
 
-        sql = "INSERT INTO dsbank.card_accounts_by_card_no(card_no,card_name,date_created,card_limit,balance,status,customer_id) " \
+        sql = "INSERT INTO dsbank2.card_accounts_by_card_no(card_no,card_name,date_created,card_limit,balance,status,customer_id) " \
               "VALUES "
 
         card_no = str(random.randint(1000000000000000, 9999999999999999))
@@ -80,7 +80,7 @@ def bank_transaction_scripts():
 
     for i in range(1, 20):
 
-        sql_transactions = "INSERT INTO dsbank.bank_transactions_by_account_no(account_no,transaction_id,date_time,amount,balance,transaction_type,status,customer_id,account_type) " \
+        sql_transactions = "INSERT INTO dsbank2.bank_transactions_by_account_no(account_no,transaction_id,date_time,amount,balance,transaction_type,status,customer_id,account_type) " \
               "VALUES"
 
         account_no = str(random.randint(1, 10000))
@@ -117,7 +117,7 @@ def card_transaction_scripts():
 
     for i in range(1, 200):
 
-        sql_transactions = "INSERT INTO dsbank.card_transactions_by_card_no(card_no,card_name,transaction_id,date_time,amount,type,status,merchant,category,customer_id) " \
+        sql_transactions = "INSERT INTO dsbank2.card_transactions_by_card_no(card_no,card_name,transaction_id,date_time,amount,type,status,merchant,category,customer_id) " \
               "VALUES"
 
         card_no = str(random.randint(1000000000000000, 9999999999999999))
