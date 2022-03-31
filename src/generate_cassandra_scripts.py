@@ -2,6 +2,9 @@ from datetime import datetime
 from faker import Faker
 import random
 import uuid
+from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
+import pandas as pd
 
 
 def customer_scripts():
@@ -141,15 +144,32 @@ def card_transaction_scripts():
         if (merchant in ["CHIPOTLE","PIZZAHUT","DOMINOS","CHICHFILA"]):
             category = "RESTAURANT"
 
-
         val = "(" + "'" + card_no + "'" + "," "'" + card_name + "'" +  "," + transaction_id + "," + "toTimeStamp(" + "'" + date_time + "')" + "," + amount + "," + "'" + type + "'"+ "," + "'" + status + "'" + "," + "'" + merchant + "'" "," + "'" + category + "'" + "," + "'" + customer_id + "'" ");"
         print(sql_transactions + val)
+
+def update_db():
+
+    cloud_config = {
+        'secure_connect_bundle': 'secure-connect-dsbank.zip'
+    }
+    auth_provider = PlainTextAuthProvider('IXlaNJmrUwZfKdZxahlKbyxh',
+                                          'T28jZ4bn-EobZL+wrNk1uM6k792IEqgHXS9k6BEYAnOs95,4HyWl1yvzYUSfqc2mGwFcAPqo6YnF5oYCvmXm460vg5,Y8Ut9hSJiAy8jFzaYYj8L0FlEsFO+myGYBzun')
+    cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
+    session = cluster.connect()
+
+    result_set = session.execute("select * from dscrypto.coins limit 1000;")
+    df = pd.DataFrame(result_set._current_rows)
+    print(df)
+
+    # fix this
+    # ps = session.prepare("update dscrypto.coins set price=?,total_value=? where user_id=? and ticker=?")
+    # result_set = session.execute(ps,(price_d,total_value,user_id,ticker))
 
 
 # customer_scripts()
 
-bank_account_scripts()
-# card_account_scripts()
+# bank_account_scripts()
+card_account_scripts()
 # bank_transaction_scripts()
 # card_transaction_scripts()
 
